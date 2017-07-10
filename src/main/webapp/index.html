@@ -1,8 +1,100 @@
 <html>
   <head>
-    <title>Welcome</title>
+  <meta content='text/html; charset=UTF-8' http-equiv='Content-Type'/>
+    <title>Contact book</title>
+    <link rel="stylesheet" href="resources/css/index.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){
+$(".ul").hide();
+$("h3 span").click(function(){
+$(this).parent().next().slideToggle();
+});
+});
+</script>
   </head>
   <body>
-  Welcome page
+     <div id="left">
+      <form class="contact_form" action="#" method="post" name="contact_form">
+      <div id="header">
+        	<button class="submit" type="submit">Добавить группу</button>
+            <input type="text"  placeholder="Семья" required />
+ 
+          
+</div> 
+<div class="box">
+&nbsp;
+<button class="submit" type="submit">+</button>
+<button class="clear2" type="submit">X</button>
+    <h3>Семья&nbsp;&nbsp;&nbsp;&nbsp;<span class="expand">+</span></h3>
+   
+    <ul class="ul">
+        <li class="li">Иванов</li>
+        <li class="li">Сидоров</li>
+        <li class="li">Петров</li>
+        <li class="li">Мясников</li>
+    </ul>
+</div>
+        	
+<div class="box">&nbsp;
+<button class="submit" type="submit">+</button>
+<button class="clear2" type="submit">X</button>
+    <h3>Работа&nbsp;&nbsp;&nbsp;&nbsp;<span class="expand">+</span></h3>
+    <ul class="ul">
+         <li class="li">Иванов</li>
+        <li class="li">Сидоров</li>
+        <li class="li">Петров</li>
+        <li class="li">Мясников</li>
+    </ul>
+</div>
+</form>
+    </div>
+    <div id="right">
+        <p id="photo" ><img src="resources/images/nophoto.png" width="200" height="200" border="1" bordercolor="white"></p>
+       <form class="contact_form" action="#" method="post" name="contact_form">
+    <ul>
+        <li>
+            <label for="fname">Имя:</label>
+            <input type="text"  placeholder="Иван" required />
+        </li>
+         <li>
+            <label for="lname">Фамилия:</label>
+            <input type="text"  placeholder="Иванов" required />
+        </li>
+        <li>
+            <label for="mobile">Мобильный:</label>
+            <input type="text"  placeholder="89605402211" required />
+        </li>
+        <li>
+            <label for="home">Домашний:</label>
+            <input type="text"  placeholder="708596" required />
+        </li>
+        <li>
+            <label for="mobile">Рабочий:</label>
+            <input type="text"  placeholder="89605402211" required />
+        </li>
+        <li>
+            <label for="email">Email:</label>
+            <input type="email" name="email" placeholder="ivan_ivanov@example.com" required />
+            <span class="form_hint">Проверьте формат "name@something.com"</span>
+        </li>
+        <li>
+            <label for="website">Сайт:</label>
+            <input type="url" name="website" placeholder="http://ivanovivan.com" required pattern="(http|https)://.+"/>
+            <span class="form_hint">Проверьте формат "http://someaddress.com"</span>
+        </li>
+       <!--  <li>
+            <label for="message">О себе:</label>
+            <textarea name="message" cols="40" rows="6" required ></textarea>
+        </li>-->
+        <li>
+        	<button class="clear" type="submit">Очистить</button>
+        	<button class="submit" type="submit">Сохранить</button>
+        </li>
+        
+    </ul>
+</form>
+    </div>
+
   </body>
 </html>
