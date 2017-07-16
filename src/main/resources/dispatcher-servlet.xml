@@ -10,7 +10,7 @@
         http://www.springframework.org/schema/data/jpa http://www.springframework.org/schema/data/jpa/spring-jpa.xsd">
 
     <mvc:annotation-driven/>
-    <tx:annotation-driven/>
+    <tx:annotation-driven transaction-manager="transactionManager"/>
     <mvc:default-servlet-handler/>
     <mvc:resources mapping="/resources/**" location="/resources/"/>
     <context:component-scan base-package="contactBook"/>
@@ -22,7 +22,7 @@
     </bean>
     <jpa:repositories base-package="contactBook.repository"/>
 
-    <bean id="sessionFactory" class="org.springframework.orm.hibernate5.LocalSessionFactoryBean">
+    <!--<bean id="sessionFactory" class="org.springframework.orm.hibernate5.LocalSessionFactoryBean">
         <property name="configLocation" value="classpath:hibernate.cfg.xml"/>
     </bean>
     <bean class="org.springframework.orm.hibernate5.HibernateTemplate">
@@ -32,5 +32,5 @@
     <bean id="transactionManager" class="org.springframework.orm.hibernate5.HibernateTransactionManager">
         <property name="sessionFactory" ref="sessionFactory"/>
     </bean>
-
+-->
 </beans>

@@ -1,8 +1,104 @@
 <html>
-  <head>
-    <title>Contact book</title>
-  </head>
-  <body>
-  Main page
-  </body>
+<head>
+  <meta content='text/html; charset=UTF-8' http-equiv='Content-Type'/>
+  <title>Contact book</title>
+  <link rel="stylesheet" href="resources/css/index.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script  charset="utf-8" src="resources/js/index.js"></script>
+</head>
+<body>
+<div id="left">
+  <div id="contact_form" >
+    <div id="header">
+      <button class="submit" onclick="add();">Добавить</button>
+      <input class="input" type="text" id="tea" name="ff" placeholder="Семья"  />
+
+    </div>
+    <!--<div id="items">
+    <div id="box">
+    &nbsp;
+    <button class="submit tree" >+</button>
+    <button class="clear2 tree" >X</button>
+        <h3>Семья&nbsp;&nbsp;&nbsp;&nbsp;<span class="expand">+</span></h3>
+
+        <ul class="ul">
+            <li class="li">Иванов</li>
+            <li class="li">Сидоров</li>
+            <li class="li">Петров</li>
+            <li class="li">Мясников</li>
+        </ul>
+    </div>
+    <div id="box">&nbsp;
+    <button class="submit tree" >+</button>
+    <button class="clear2 tree" >X</button>
+        <h3>Работа&nbsp;&nbsp;&nbsp;&nbsp;<span class="expand">+</span></h3>
+        <ul class="ul">
+             <li class="li">Иванов</li>
+            <li class="li">Сидоров</li>
+            <li class="li">Петров</li>
+            <li class="li">Мясников</li>
+        </ul>
+    </div>
+    <div id="box">
+
+    &nbsp;
+    <button class="submit tree"  >+</button>
+    <button class="clear2 tree" >X</button>
+        <h3>Другие&nbsp;&nbsp;&nbsp;&nbsp;<span class="expand">+</span></h3>
+
+        <ul class="ul">
+            <li class="li">Иванов</li>
+            <li class="li">Сидоров</li>
+            <li class="li">Петров</li>
+            <li class="li">Мясников</li>
+        </ul>
+    </div>
+    </div>-->
+  </div>
+
+  <div id = 'results'> </div>
+
+</div>
+<div id="right">
+  <p id="photo" ><img src="resources/images/nophoto.png" width="200" height="200" onclick="document.getElementById('file').click()" border="1" bordercolor="white"></p>
+  <div id="contact_form" >
+    <ul >
+      <li >
+        <label for="fname">Имя:</label>
+        <input class="input" type="text"  id="firstname" placeholder="Иван" />
+      </li>
+      <li>
+        <label for="lname">Фамилия:</label>
+        <input class="input" type="text"  id="lastname" placeholder="Иванов" />
+      </li>
+      <li>
+        <label for="mobile">Телефон:</label>
+        <input class="input" type="text"  id="phone" placeholder="89605402211"/>
+      </li>
+
+      <li id="last">
+        <label for="email">Email:</label>
+        <input  class="input" type="text" id="email" placeholder="ivan_ivanov@example.com"  />
+      </li>
+      <li>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        <button class="submit" onclick="addNew();">Новое поле</button>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        <input class="input" type="text" id="word"  />
+      </li>
+      <li>
+        <input accept="image/*" type="file" id="file" style="display:none" />
+        <button class="clear" onclick="reset();">Очистить</button>
+        <button class="submit" id="save">Сохранить</button>
+      </li>
+
+    </ul>
+
+  </div>
+</div>
+<div class="scroll-to-top">
+  <!-- <p>Scroll to top</p> *Use this as a text option, instead of the image icon.*-->
+</div>
+</body>
+
 </html>

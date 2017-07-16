@@ -1,5 +1,9 @@
 package contactBook.service;
 
+import contactBook.model.User;
+import contactBook.repository.UserRepository;
+import contactBook.service.Encryptor.PasswordEncryptor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -12,11 +16,24 @@ import java.util.ArrayList;
 
 @Service("provider")
 public class CustomAuthenticationProvider implements AuthenticationProvider {
+    private final UserRepository userRepository;
+    private PasswordEncryptor encryptor;
+
+    @Autowired
+    public CustomAuthenticationProvider(UserRepository userRepository, PasswordEncryptor encryptor) {
+        this.userRepository = userRepository;
+        this.encryptor = encryptor;
+    }
+
     @Override
     public Authentication authenticate(Authentication authentication) throws AuthenticationException {
-        ArrayList<GrantedAuthority> roles = new ArrayList<>();
-        roles.add(new SimpleGrantedAuthority("ROLE_USER"));
-        return new UsernamePasswordAuthenticationToken(authentication.getName(),authentication.getCredentials(),roles);
+        User user = userRepository.getUserByUserName(authentication.getName());
+        if(user==null) return null;
+        if(encryptor.encryptPassword(authentication.getCredentials().toString(),authentication.getName()).equals(user.getPassword())){
+            ArrayList<GrantedAuthority> roles = new ArrayList<>();
+            roles.add(new SimpleGrantedAuthority("ROLE_USER"));
+            return new UsernamePasswordAuthenticationToken(authentication.getName(),authentication.getCredentials(),roles);
+        }else return null;
     }
 
     @Override
