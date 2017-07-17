@@ -6,11 +6,11 @@ import javax.persistence.*;
 @Table(name = "values")
 public class FieldValue extends BaseModel{
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "_user", nullable = false)
     private User user;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "field", nullable = false)
     private Field field;
 

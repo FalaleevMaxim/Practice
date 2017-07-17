@@ -8,10 +8,10 @@
 </head>
 <body>
 <div id="left">
-  <div id="contact_form" >
+  <div class="contact_form" >
     <div id="header">
-      <button class="submit" onclick="add();">Добавить</button>
-      <input class="input" type="text" id="tea" name="ff" placeholder="Семья"  />
+      <button class="submit" onclick="addGroup();">Добавить</button>
+      <input class="input" type="text" id="new_group" name="group_name" placeholder="Семья"  />
 
     </div>
     <!--<div id="items">
@@ -55,25 +55,28 @@
     </div>
     </div>-->
   </div>
-
   <div id = 'results'> </div>
-
 </div>
 <div id="right">
   <p id="photo" ><img src="resources/images/nophoto.png" width="200" height="200" onclick="document.getElementById('file').click()" border="1" bordercolor="white"></p>
-  <div id="contact_form" >
-    <ul >
+  <div class="contact_form" >
+      <input type="hidden" id="selectedId">
+    <ul id="fields_ul">
       <li >
-        <label for="fname">Имя:</label>
+        <label for="nickname">Никнейм:</label>
+        <input class="input" type="text"  id="nickname" placeholder="Иван" />
+      </li>
+      <li >
+        <label for="firstname">Имя:</label>
         <input class="input" type="text"  id="firstname" placeholder="Иван" />
       </li>
       <li>
-        <label for="lname">Фамилия:</label>
+        <label for="lastname">Фамилия:</label>
         <input class="input" type="text"  id="lastname" placeholder="Иванов" />
       </li>
       <li>
-        <label for="mobile">Телефон:</label>
-        <input class="input" type="text"  id="phone" placeholder="89605402211"/>
+        <label for="number">Телефон:</label>
+        <input class="input" type="text"  id="number" placeholder="89605402211"/>
       </li>
 
       <li id="last">
@@ -82,14 +85,16 @@
       </li>
       <li>
         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-        <button class="submit" onclick="addNew();">Новое поле</button>
+        <button class="submit" onclick="addField();">Новое поле</button>
         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-        <input class="input" type="text" id="word"  />
+        <input class="input" type="text" id="new_field"  />
       </li>
       <li>
-        <input accept="image/*" type="file" id="file" style="display:none" />
-        <button class="clear" onclick="reset();">Очистить</button>
-        <button class="submit" id="save">Сохранить</button>
+          <form id="file_form" action="">
+              <input accept="image/*" type="file" id="file" style="display:none" />
+          </form>
+          <button class="clear" onclick="removeContact();">Удалить</button>
+        <button class="submit" id="save" onclick="submit()">Сохранить</button>
       </li>
 
     </ul>

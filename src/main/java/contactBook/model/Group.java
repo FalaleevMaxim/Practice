@@ -9,11 +9,11 @@ import java.util.Set;
 @Table(name = "groups")
 public class Group extends NamedBaseModel{
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "owner_id", nullable = false)
     private User owner;
 
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "user_group",
     joinColumns = @JoinColumn(name = "group_id"),
     inverseJoinColumns = @JoinColumn(name = "user_id"))
@@ -34,23 +34,5 @@ public class Group extends NamedBaseModel{
     public void setMembers(Set<User> members) {
         Objects.requireNonNull(members);
         this.members = members;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof Group)) return false;
-        if (!super.equals(o)) return false;
-
-        Group group = (Group) o;
-
-        return owner.equals(group.owner);
-    }
-
-    @Override
-    public int hashCode() {
-        int result = super.hashCode();
-        result = 31 * result + owner.hashCode();
-        return result;
     }
 }

@@ -42,7 +42,6 @@ public class UserController {
     public @ResponseBody int register(@ModelAttribute RegisterDto register){
         User newUser = new User(register.getUsername(), encryptor.encryptPassword(register.getPassword(), register.getUsername()));
         newUser.setNick(register.getNickname());
-        userRepo.saveAndFlush(newUser);
-        return newUser.getId();
+        return userRepo.saveAndFlush(newUser).getId();
     }
 }

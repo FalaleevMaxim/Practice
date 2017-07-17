@@ -2,7 +2,7 @@ function submit() {
     var username = $("#username").val();
     $.get("/User/FreeName/"+ username,function (isFree) {
         if(!isFree){
-            alert("User with such username already exists");
+            alert("Пользователь с наким именем уже существует");
         }else{
             var password = $("#password").val();
             var nickname = $("#nickname").val();
