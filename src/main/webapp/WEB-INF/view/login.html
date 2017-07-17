@@ -1,16 +1,42 @@
+<!DOCTYPE html>
 <html>
 <head>
-    <title>Login Page</title>
+	<meta charset="UTF-8">
+	<link rel="stylesheet" href="/resources/css/style.css" media="screen" type="text/css" />
+    <script  charset="utf-8" src="/resources/js/register.js"></script>
+    <script  charset="utf-8" src="/resources/js/jquery-3.0.0.min.js"></script>
 </head>
-<body onload='document.f.username.focus();'>
-<h3>Login with Username and Password</h3>
-<form name='f' action='/login' method='POST'>
-    <table>
-        <tr><td>User:</td><td><input type='text' name='username' value=''></td></tr>
-        <tr><td>Password:</td><td><input type='password' name='password'/></td></tr>
-        <tr><td colspan='2'><input name="submit" type="submit" value="Login"/></td></tr>
-    </table>
-    <a href="/User/Register">Register</a>
-</form>
+
+<body>
+  <div id="login">
+  <div class="flip">
+    <div class="form-signup">
+      <h1>Регистрация</h1>
+      <fieldset>
+      <p class="login-msg"></p>
+        <input type="text" id="nickname" placeholder="Ник" required />
+        <input type="text" id="username" placeholder="Имя пользователя"  required/>
+        <input type="password" id="password" placeholder="Ваш сложный пароль" required />
+          <button id="submit" class="submit" onclick="submit()">Зарегистрироваться</button>
+    <a href="#" class="flipper">Уже зарегистрированы? Войти.</a>
+      </fieldset>
+    </div>
+    <div class="form-login">
+      <h1>Авторизация</h1>
+      <fieldset>
+        <form name="f" action="/login" method="POST">
+          <input type="text" name="username" placeholder="Логин или Email" required />
+          <input type="password" name="password" placeholder="Пароль" required />
+          <button class="submit">ВОЙТИ</button>
+        </form>
+        <p><a href="#" class="flipper">Нет аккаунта? Регистрация.</a><br>
+      </fieldset>
+    </div>
+  </div>
+</div>
+
+  <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
+  <script src="/resources/js/flipp.js"></script>
+
 </body>
 </html>
