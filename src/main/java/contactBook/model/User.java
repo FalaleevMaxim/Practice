@@ -28,9 +28,6 @@ public class User extends BaseModel {
     @Column(name = "phone")
     private String phone;
 
-    @Column(name = "avatar")
-    private String avatar;
-
     @OneToMany(mappedBy = "owner", fetch = FetchType.EAGER)
     private Set<Group> groups = new HashSet<>();
 
@@ -103,14 +100,6 @@ public class User extends BaseModel {
         this.email = email;
     }
 
-    public String getAvatar() {
-        return avatar;
-    }
-
-    public void setAvatar(String avatar) {
-        this.avatar = avatar;
-    }
-
     public Set<Group> getGroups() {
         return groups;
     }
@@ -150,5 +139,13 @@ public class User extends BaseModel {
         int result = super.hashCode();
         result = 31 * result + (userName != null ? userName.hashCode() : 0);
         return result;
+    }
+
+    public Set<FieldValue> getFields() {
+        return fields;
+    }
+
+    public void setFields(Set<FieldValue> fields) {
+        this.fields = fields;
     }
 }

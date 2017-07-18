@@ -55,7 +55,8 @@ function createContact(id) {
         firstName:'',
         lastName:'',
         number:'',
-        email:''
+        email:'',
+        fieldValues:[]
     }
 }
 
@@ -118,20 +119,52 @@ function setInfo(member) {
     $('#lastname').val( member.lastName);
     $('#number').val( member.number);
     $('#email').val( member.email);
+    $.each(member.fieldValues, function (fv_i, field) {
+        addFieldElement(field);
+    })
 }
 
 function addField() {
-    newFieldName = $('#new_field').val();
+    var newFieldName = $('#new_field').val();
     if (newFieldName == "") {
         alert("Вы не ввели название поля!");
     } else {
-        //TODO add field to database
-        var newFieldElement = $("<li><label>" + newFieldName + ":</label><input class='in'/></li>");
-        var removeFieldBtn = $("<button class='clear2'>X</button>");
-        //TODO: remove field btn click
-        newFieldElement.append(removeFieldBtn);
-        $("#last").append(newFieldElement);
+        $.get("/ContactBook/fieldId/"+newFieldName,
+            function (fieldId) {
+                var userId = $("#selectedId").val();
+                $.get("/ContactBook/setFieldValue/"+userId+"/"+fieldId,
+                function (fieldValueId) {
+                    var member = getMember(userId);
+                    var field = {
+                        id:fieldValueId,
+                        userId:userId,
+                        fieldId:fieldId,
+                        fieldName:newFieldName,
+                        value:''
+                    };
+                    member.fieldValues.push(field);
+                    addFieldElement(field);
+                })
+            });
     }
+}
+
+function addFieldElement(field) {
+    var newFieldElement = $("<li id='field"+field.id+"'><input type='hidden' class='fieldId' value='"+field.id+"'>" +
+                                "<label>" + field.fieldName + ":</label><input id='fieldValueInput"+field.id+"' class='in'/></li>");
+    var removeFieldBtn = $("<button class='clear2'>X</button>");
+    removeFieldBtn.click(function () {
+        $.get("/ContactBook/removeFieldValue/"+field.id,
+            function () {
+                removeField(field.id);
+            });
+    });
+    newFieldElement.append(removeFieldBtn);
+    $("#last").append(newFieldElement);
+}
+
+function removeField(fieldId) {
+    $("#field"+fieldId).remove();
 }
 
 function removeContact() {
@@ -161,7 +194,6 @@ jQuery(document).ready(function () {
     })
 });
 
-
 function submit() {
     var data = {
         id:$("#selectedId").val(),
@@ -169,26 +201,66 @@ function submit() {
         firstName:$("#firstname").val(),
         lastName:$("#lastname").val(),
         number:$("#number").val(),
-        email:$("#email").val()
+        email:$("#email").val(),
+        fieldValues:[]
     };
-    $.post("/ContactBook/update",
-        data,
-        function () {
-            $.each(CONTACTS,function (g_i, group) {
-                $.each(group.members, function (m_i, member) {
-                    if(member.id==data.id){
-                        member.nick = data.nick;
-                        member.firstName = data.firstName;
-                        member.lastName = data.lastName;
-                        member.number = data.number;
-                        member.email = data.email;
-                        $("#nick"+member.id).text(member.nick);
-                    }
-                })
+    var member = getMember(data.id);
+    $.each(member.fieldValues, function (fv_i, fieldValue) {
+        data.fieldValues.push({
+            id:fieldValue.id,
+            userId:fieldValue.userId,
+            fieldId:fieldValue.fieldId,
+            fieldName:fieldValue.fieldName,
+            value:$("#fieldValueInput"+fieldValue.id).val()
+        });
+    });
+    $.ajax("/ContactBook/update",{
+        method:'POST',
+        data:JSON.stringify(data),
+        contentType : 'application/json',
+        success : function () {
+            member.nick = data.nick;
+            member.firstName = data.firstName;
+            member.lastName = data.lastName;
+            member.number = data.number;
+            member.email = data.email;
+            $.each(member.fieldValues, function (fv_i, fieldValue) {
+                fieldValue.id=data.fieldValues[fv_i].id;
+                fieldValue.userId=data.fieldValues[fv_i].userId;
+                fieldValue.fieldId=data.fieldValues[fv_i].fieldId;
+                fieldValue.fieldName=data.fieldValues[fv_i].fieldName;
+                fieldValue.value=data.fieldValues[fv_i].value;
             });
+            $("#nick"+member.id).text(member.nick);
             alert("Информация обновлена.")
-        })
+        }
+    })
+
 }
 
+function getMember(id) {
+    var res = null;
+    $.each(CONTACTS,function (g_i, group) {
+        $.each(group.members, function (m_i, member) {
+            if(member.id==id){
+                res = member;
+            }
+        })
+    });
+    return res;
+}
 
-    
+function resetFile() {
+    $("#file").val('');
+}
+
+function submitImage() {
+    if(!$("#file").val()) return;
+    $.ajax( {
+        url: "/ContactBook/uploadImage/"+$("#selectedId").val(),
+        type: 'POST',
+        data: new FormData( $('#file_form') ),
+        processData: false,
+        contentType: false
+    } );
+}

@@ -20,6 +20,14 @@ public class FieldValue extends BaseModel{
     @Column(name = "rank")
     private int rank;
 
+    public FieldValue() {
+    }
+
+    public FieldValue(User user, Field field) {
+        this.user = user;
+        this.field = field;
+    }
+
     public User getUser() {
         return user;
     }
@@ -50,24 +58,5 @@ public class FieldValue extends BaseModel{
 
     public void setRank(int rank) {
         this.rank = rank;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof FieldValue)) return false;
-
-        FieldValue that = (FieldValue) o;
-
-        if (!user.equals(that.user)) return false;
-        if (!field.equals(that.field)) return false;
-        return value != null ? value.equals(that.value) : that.value == null;
-    }
-
-    @Override
-    public int hashCode() {
-        int result = user.hashCode();
-        result = 31 * result + field.hashCode();
-        return result;
     }
 }

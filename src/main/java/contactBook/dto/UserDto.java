@@ -1,6 +1,11 @@
 package contactBook.dto;
 
+import contactBook.model.FieldValue;
 import contactBook.model.User;
+
+import java.util.HashSet;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 public class UserDto {
     private int id;
@@ -9,6 +14,7 @@ public class UserDto {
     private String lastName;
     private String email;
     private String number;
+    private Set<FieldValueDto> fieldValues = new HashSet<>();
 
     public UserDto() {}
 
@@ -19,6 +25,7 @@ public class UserDto {
         this.lastName = user.getLastName();
         this.email = user.getEmail();
         this.number = user.getPhone();
+        this.setFieldValues(user.getFields().stream().map(FieldValueDto::new).collect(Collectors.toSet()));
     }
 
     public String getNick() {
@@ -67,5 +74,13 @@ public class UserDto {
 
     public void setId(int id) {
         this.id = id;
+    }
+
+    public Set<FieldValueDto> getFieldValues() {
+        return fieldValues;
+    }
+
+    public void setFieldValues(Set<FieldValueDto> fieldValues) {
+        this.fieldValues = fieldValues;
     }
 }

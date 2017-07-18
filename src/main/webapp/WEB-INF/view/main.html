@@ -14,46 +14,6 @@
       <input class="input" type="text" id="new_group" name="group_name" placeholder="Семья"  />
 
     </div>
-    <!--<div id="items">
-    <div id="box">
-    &nbsp;
-    <button class="submit tree" >+</button>
-    <button class="clear2 tree" >X</button>
-        <h3>Семья&nbsp;&nbsp;&nbsp;&nbsp;<span class="expand">+</span></h3>
-
-        <ul class="ul">
-            <li class="li">Иванов</li>
-            <li class="li">Сидоров</li>
-            <li class="li">Петров</li>
-            <li class="li">Мясников</li>
-        </ul>
-    </div>
-    <div id="box">&nbsp;
-    <button class="submit tree" >+</button>
-    <button class="clear2 tree" >X</button>
-        <h3>Работа&nbsp;&nbsp;&nbsp;&nbsp;<span class="expand">+</span></h3>
-        <ul class="ul">
-             <li class="li">Иванов</li>
-            <li class="li">Сидоров</li>
-            <li class="li">Петров</li>
-            <li class="li">Мясников</li>
-        </ul>
-    </div>
-    <div id="box">
-
-    &nbsp;
-    <button class="submit tree"  >+</button>
-    <button class="clear2 tree" >X</button>
-        <h3>Другие&nbsp;&nbsp;&nbsp;&nbsp;<span class="expand">+</span></h3>
-
-        <ul class="ul">
-            <li class="li">Иванов</li>
-            <li class="li">Сидоров</li>
-            <li class="li">Петров</li>
-            <li class="li">Мясников</li>
-        </ul>
-    </div>
-    </div>-->
   </div>
   <div id = 'results'> </div>
 </div>
@@ -90,8 +50,8 @@
         <input class="input" type="text" id="new_field"  />
       </li>
       <li>
-          <form id="file_form" action="">
-              <input accept="image/*" type="file" id="file" style="display:none" />
+          <form id="file_form" action="/ContactBook/uploadImage/" enctype="multipart/form-data">
+              <input accept="image/*" type="file" id="file" name="file" style="display:none" onclick="resetFile()" onchange="submitImage()" />
           </form>
           <button class="clear" onclick="removeContact();">Удалить</button>
         <button class="submit" id="save" onclick="submit()">Сохранить</button>

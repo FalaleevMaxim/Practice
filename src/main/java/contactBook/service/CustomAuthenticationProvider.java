@@ -27,7 +27,7 @@ public class CustomAuthenticationProvider implements AuthenticationProvider {
 
     @Override
     public Authentication authenticate(Authentication authentication) throws AuthenticationException {
-        User user = userRepository.getUserByUserName(authentication.getName());
+        User user = userRepository.findUserByUserName(authentication.getName());
         if(user==null) return null;
         if(encryptor.encryptPassword(authentication.getCredentials().toString(),authentication.getName()).equals(user.getPassword())){
             ArrayList<GrantedAuthority> roles = new ArrayList<>();

@@ -29,7 +29,7 @@ public class UserController {
 
     @RequestMapping(method = RequestMethod.GET, value = "/FreeName/{name}")
     public @ResponseBody boolean freeUsername(@PathVariable String name){
-        return userRepo.getUserByUserName(name)==null;
+        return userRepo.findUserByUserName(name)==null;
     }
 
     @RequestMapping(method = RequestMethod.GET, value = "/Register")
